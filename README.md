@@ -1,9 +1,9 @@
-# Shopular
+# Drone Tracker
 
 ##### The Iron Yard - Week 6
-An initial project to understand MVC frameworks with Angular.</br>
-<a href="https://failerk.github.io/Shopular---Week-6/">View on GitHub Pages</a>
-### Tech Used
+A single page application built with Angular to track US drone strikes.</br>
+All drone data comes from http://dronestre.am/
+#### Tech Used
 <ul>
 <li>HTML</li>
 <li>SCSS</li>
