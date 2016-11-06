@@ -9,32 +9,39 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
     <!-- Site Styles -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- Google Maps --> 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7uvUtnNgXu1fX7TKPzSK6Ne4WVXBaprI"></script>
 </head>
 
 <body>
-    <!-- Header -->
-    
     <!-- Main Body Container-->
-    <div class="container-flex wrapper" ng-controller="mapController as map">
-        <div class="mapContainer" map-lazy-load="{{map.googleMapsUrl}}">
-            <map 
-                id="map" 
-                class="mainMap" 
-                center="41,-87" 
-                zoom="3" 
-                default-style="false" 
-                street-view-control="false">
-                <marker ng-repeat="strike in map.drones[0]" 
-                position="[{{strike.lat | number}}, {{strike.lon | number}}]" 
-                title="test{{strike.number | number}}">
-                </marker>
-            </map>
+    <div class="container-flex wrapper">
+        <div id="rowContainer" class="row">
+            <div class="mapContainer col-md-8" ng-controller="mapController as vm">
+                <ng-map id="map" class="mainMap" center="31.9676617,45.5283253" zoom="4" default-style="false" street-view-control="false">
+                    <marker ng-repeat="strike in vm.drones()" position="[{{strike.lat | number}}, {{strike.lon | number}}]" title="drone{{strike.number}}">
+                    </marker>
+                </ng-map>
+            </div>
+            <!-- /.container -->
+            <!-- Aside -->
+            <aside class="col-md-4" ng-controller="asideController as filter">
+                <div class="titleHeader">
+                    <h1>Drone Tracker</h1>
+                </div>
+                <div class="filterOptions">
+                    <button ng-click="filter.clear()" >Clear</button>
+                    <button ng-click="filter.all()" >All Strikes</button>
+                    <p>Sort By Country</p>
+                    <button ng-click="filter.filterByCountry('iraq')" >Obama</button>
+                    <p>View Heatmap</p>
+                </div>
+            </aside>
         </div>
     </div>
-    <!-- /.container -->
     <!-- Boostrap & Tether -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js " integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8 " crossorigin="anonymous "></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js " integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK " crossorigin="anonymous "></script>
+<!--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js " integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK " crossorigin="anonymous "></script> -->
     <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
     <!-- Ngmap -->
@@ -42,9 +49,9 @@
     <!-- Main JavaScript File -->
     <script src="js/main.js "></script>
     <!-- Controllers/Factories -->
-    <script scr="js/factories/droneFactory.js"></script>
     <script src="js/factories/mapFactory.js"></script>
     <script src="js/controllers/mapController.js"></script>
+    <script src="js/controllers/asideController.js"></script>
 </body>
 
 </html>

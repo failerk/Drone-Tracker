@@ -7,13 +7,10 @@
         var vm = this;
 
         //------------------------------------
-        // Set lazy map load url with api key
-        //------------------------------------
-        vm.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7uvUtnNgXu1fX7TKPzSK6Ne4WVXBaprI";
-
-        //------------------------------------
         // Get drone strike array from map factory
         //------------------------------------
-        vm.drones = map.getStrikes();
+        vm.drones = function () {
+            return map.strikeArray;
+        };
     });
 })();

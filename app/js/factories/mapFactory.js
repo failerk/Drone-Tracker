@@ -6,35 +6,72 @@
         .factory('map', ($http) => {
 
 
-            var apiURL = 'http://api.dronestre.am/data'
+            return new DroneStrike();
 
-            //------------------------------------
-            // Drone Strike Array
-            //------------------------------------
-            let strikeArray = []
+            function DroneStrike() {
+                let strike = this;
 
-            //------------------------------------
-            // Return items from apicall
-            //------------------------------------
-            const getStrikes = () => {
-                return strikeArray
+                //------------------------------------
+                // Drone Strike Array
+                //------------------------------------
+                strike.allStrikes = [];
+                strike.strikeArray = [];
+
+                //------------------------------------
+                // Load the data
+                //------------------------------------
+                loadData();
+
+                
+                //------------------------------------
+                // Clear items
+                //------------------------------------
+                strike.clear = () => {
+                    strike.strikeArray = [];
+                };
+
+                //------------------------------------
+                // Load all strikes
+                //------------------------------------
+                strike.all = () => {
+                    strike.strikeArray = strike.allStrikes;
                 }
 
-            //------------------------------------
-            // make API call
-            //------------------------------------    
-            let apicall = $http({
-                method: 'GET',
-                url: apiURL
-            }).then(function successCallback(response) {
-                let data = response.data.strike
-                strikeArray.push(data)
-            }, function errorCallback(response) {
-                console.log("something went wrong")
-            });
+                //------------------------------------
+                // Filter by country
+                //------------------------------------
+                strike.filterByCountry = (country) => {
+                    strike.strikeArray = [];
 
-            return {
-                getStrikes
+                    strike.allStrikes.map(strike => {
+                        if (strike.country == country) {
+                            strike.strikeArray.push(strike);
+                        }
+                    });
+                }
+                
+                function loadData() {
+                    //------------------------------------
+                    // make API call
+                    //------------------------------------    
+                    let apicall = $http({
+                        method: 'GET',
+                        url: 'http://api.dronestre.am/data'
+                    }).then(function successCallback(response) {
+                        let data = response.data.strike;
+                        strike.allStrikes = data;
+                        strike.strikeArray = strike.allStrikes;
+                    }, function errorCallback(response) {
+                        console.log("something went wrong")
+                    })
+                }
+                
+
+                //------------------------------------
+                // Return items from apicall
+                //------------------------------------
+                // const updateStrikes = (strikeArray) => {
+                //     }
             }
 
         });
