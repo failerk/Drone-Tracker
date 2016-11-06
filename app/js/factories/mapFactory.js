@@ -22,7 +22,6 @@
                 //------------------------------------
                 loadData();
 
-                
                 //------------------------------------
                 // Clear items
                 //------------------------------------
@@ -42,14 +41,31 @@
                 //------------------------------------
                 strike.filterByCountry = (country) => {
                     strike.strikeArray = [];
+                    let update = strike.strikeArray
 
                     strike.allStrikes.map(strike => {
-                        if (strike.country == country) {
-                            strike.strikeArray.push(strike);
+                        if (strike.country === country) {
+                            update.push(strike);
                         }
                     });
                 }
-                
+
+                //------------------------------------
+                // Filter by year
+                //------------------------------------
+                strike.filterByYear = (year) => {
+                    strike.strikeArray = [];
+                    let update = strike.strikeArray
+
+                    strike.allStrikes.map(strike => {
+                        let newDate = strike.date.slice(0, 4)
+                        console.log(newDate)
+                        if (newDate === year) {
+                            update.push(strike);
+                        }
+                    });
+                }
+                            
                 function loadData() {
                     //------------------------------------
                     // make API call
@@ -66,12 +82,6 @@
                     })
                 }
                 
-
-                //------------------------------------
-                // Return items from apicall
-                //------------------------------------
-                // const updateStrikes = (strikeArray) => {
-                //     }
             }
 
         });

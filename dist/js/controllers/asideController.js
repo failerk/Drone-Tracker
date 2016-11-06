@@ -14,11 +14,8 @@
         };
 
         //------------------------------------
-        // Sort By Year
-        //------------------------------------
-        // vm.dronesFilter = () => { 
-
-        // }
+        // Either get all strikes or clear strikes
+        //------------------------------------        
         vm.clear = function () {
             map.clear();
         };
@@ -32,6 +29,13 @@
         //------------------------------------
         vm.filterByCountry = function (country) {
             map.filterByCountry(country);
+        };
+
+        //------------------------------------
+        // Sort By Year
+        //------------------------------------
+        vm.filterByYear = function (year) {
+            map.filterByYear(year);
         };
     });
 })();

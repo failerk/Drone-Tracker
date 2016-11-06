@@ -40,10 +40,27 @@
             //------------------------------------
             strike.filterByCountry = function (country) {
                 strike.strikeArray = [];
+                var update = strike.strikeArray;
 
                 strike.allStrikes.map(function (strike) {
-                    if (strike.country == country) {
-                        strike.strikeArray.push(strike);
+                    if (strike.country === country) {
+                        update.push(strike);
+                    }
+                });
+            };
+
+            //------------------------------------
+            // Filter by year
+            //------------------------------------
+            strike.filterByYear = function (year) {
+                strike.strikeArray = [];
+                var update = strike.strikeArray;
+
+                strike.allStrikes.map(function (strike) {
+                    var newDate = strike.date.slice(0, 4);
+                    console.log(newDate);
+                    if (newDate === year) {
+                        update.push(strike);
                     }
                 });
             };
@@ -63,12 +80,6 @@
                     console.log("something went wrong");
                 });
             }
-
-            //------------------------------------
-            // Return items from apicall
-            //------------------------------------
-            // const updateStrikes = (strikeArray) => {
-            //     }
         }
     });
 })();
